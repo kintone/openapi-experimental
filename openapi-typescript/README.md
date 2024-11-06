@@ -12,5 +12,5 @@ $ npm start
 
 ## generate schema
 ```
-npx openapi-typescript ../openapi.yaml -o ./src/generated/schema.d.ts
+npx openapi-typescript ./openapi.yaml -o ./src/generated/schema.d.ts
 ```
