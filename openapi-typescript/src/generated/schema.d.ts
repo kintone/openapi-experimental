@@ -449,6 +449,32 @@ export interface components {
                 };
             };
         };
+        KintoeRestApiError: {
+            /**
+             * @description The ID of the error.
+             * @example 123
+             */
+            id?: string;
+            /**
+             * @description The code of the error, to specify the type of error it is.
+             * @example GA01
+             */
+            code?: string;
+            /**
+             * @description The HTTP status of the response.
+             * @example 400
+             */
+            status?: number;
+            /** @description The HTTP headers of the response. */
+            headers?: Record<string, never>;
+            /**
+             * @description The error message.
+             * @example The error message.
+             */
+            message?: string;
+            /** @description The index of the failed request when executing bulkRequest and one of the requests fails. This value is undefined otherwise. */
+            bulkRequestIndex?: number | Record<string, never>;
+        };
     };
     responses: never;
     parameters: {
@@ -513,14 +539,18 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["KintoeRestApiError"];
+                };
             };
             /** @description Internal Server Error */
             500: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["KintoeRestApiError"];
+                };
             };
         };
     };
@@ -873,6 +903,24 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["UpdateAppAdminNotesResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KintoeRestApiError"];
+                };
+            };
+            /** @description Bad Request */
+            405: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KintoeRestApiError"];
                 };
             };
         };
