@@ -1,4 +1,4 @@
-# `openapi-experimental/openapi-typescript`
+# `openapi-experimental/openapi-ts`
 
 ## install
 ```
