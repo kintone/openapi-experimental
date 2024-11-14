@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "lint": "vacuum lint -d ./openapi.yaml"
+  },
+  "devDependencies": {
+    "@quobix/vacuum": "^0.14.2"
+  }
+}
