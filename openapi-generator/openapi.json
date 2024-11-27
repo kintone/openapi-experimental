@@ -1,0 +1,13 @@
+{
+  "groupId": "com.openapi-generator",
+  "artifactId": "generated",
+  "artifactVersion": "0.0.1-SNAPSHOT",
+  "apiPackage": "com.openapi-generator.generated.api",
+  "modelPackage": "com.openapi-generator.generated.model",
+  "java17": true,
+  "components": {},
+  "info": {},
+  "interfaceOnly": true,
+  "dateLibrary": "java8",
+  "openapi": "3.0.3"
+}
