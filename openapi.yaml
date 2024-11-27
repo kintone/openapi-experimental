@@ -1,7 +1,10 @@
-openapi: 3.1.0
+openapi: 3.0.0
+servers:
+  - url: https://sample.cybozu.com
 info:
   version: 1.0.0
   title: Kintone REST API
+  description: "This is an experimental"
 tags:
   - name: App
   - name: Record
@@ -18,6 +21,7 @@ paths:
     post: # X-HTTP-Method-Overrideを試すためにpostにしてみる
       tags:
         - App
+      summary: 1件のアプリの情報を取得する。
       description: 1件のアプリの情報を取得する。
       operationId: getApp
       # parameters:
@@ -28,6 +32,7 @@ paths:
       #     schema:
       #       type: string
       requestBody:
+        description: GetApp Request Body
         content:
           application/json:
             schema:
@@ -48,80 +53,27 @@ paths:
             type: string
             enum: [GET]
             default: GET
+          example:
+            X-HTTP-Method-Override: GET
       responses:
         "200":
           description: Success
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  appId:
-                    type: string
-                    examples: 
-                      - "123"
-                  code:
-                    type: string
-                    examples: 
-                      - ""
-                  name:
-                    type: string
-                    examples: 
-                      - "案件管理"
-                  description:
-                    type: string
-                    examples: 
-                      - "案件ごとに、受注の確度や金額はもちろん、活動の履歴も記録できるアプリです。"
-                  spaceId:
-                    type: string
-                    examples: 
-                      - "2"
-                  threadId:
-                    type: string
-                    examples: 
-                      - "3"
-                  createdAt:
-                    type: string
-                    examples: 
-                      - "2021-10-01T05:14:05.000Z"
-                  creator:
-                    type: object
-                    properties:
-                      code:
-                        type: string
-                        examples: 
-                          - "tanaka"
-                      name:
-                        type: string
-                        examples: 
-                          - "田中太郎"
-                  modifiedAt:
-                    type: string
-                    examples:
-                      - "2021-10-02T05:22:05.000Z"
-                  modifier:
-                    type: object
-                    properties:
-                      code:
-                        type: string
-                        examples: 
-                          - "tanaka"
-                      name:
-                        type: string
-                        examples: 
-                          - "田中太郎"
+                $ref: '#/components/schemas/GetAppResponss'
         "400":
           description: Bad Request
           content:
             application/json:
               schema: 
-                $ref: '#/components/schemas/KintoeRestApiError'
+                $ref: '#/components/schemas/KintoneRestApiError'
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema: 
-                $ref: '#/components/schemas/KintoeRestApiError'
+                $ref: '#/components/schemas/KintoneRestApiError'
   /k/v1/preview/app.json:
     post:
       tags:
@@ -441,13 +393,13 @@ paths:
           content:
             application/json:
               schema: 
-                $ref: '#/components/schemas/KintoeRestApiError'
+                $ref: '#/components/schemas/KintoneRestApiError'
         "405":
           description: Bad Request
           content:
             application/json:
               schema: 
-                $ref: '#/components/schemas/KintoeRestApiError'
+                $ref: '#/components/schemas/KintoneRestApiError'
   /guest/{SpaceID}/k/v1/preview/app/adminNotes.json:
     get: 
       operationId: getAdminNotesGuestPreview
@@ -543,7 +495,7 @@ paths:
           description: Unauthorized
         '500':
           description: Internal server error
-  /app/form/fields.json:
+  /k/v1/preview/app/form/fields.json:
     tags:
       - App
     get:
@@ -587,14 +539,17 @@ components:
       type: http
       scheme: header
       name: X-Cybozu-Authorization
+      description: Basic認証
     ApiTokenAuth:
       type: apiKey
       in: header
       name: X-Cybozu-API-Token
+      description: APIトークン
     SessionAuth:
       type: apiKey
       in: cookie
       name: SESSIONID
+      description: セッションID
     # OAuth:
     #   type: oauth2
     #   flows:
@@ -613,6 +568,64 @@ components:
       schema:
         type: integer
   schemas:
+    GetAppResponss:
+      description: Get App Response
+      type: object
+      properties:
+        appId:
+          type: string
+          examples: 
+            - "123"
+        code:
+          type: string
+          examples: 
+            - ""
+        name:
+          type: string
+          examples: 
+            - "案件管理"
+        description:
+          type: string
+          examples: 
+            - "案件ごとに、受注の確度や金額はもちろん、活動の履歴も記録できるアプリです。"
+        spaceId:
+          type: string
+          examples: 
+            - "2"
+        threadId:
+          type: string
+          examples: 
+            - "3"
+        createdAt:
+          type: string
+          examples: 
+            - "2021-10-01T05:14:05.000Z"
+        creator:
+          type: object
+          properties:
+            code:
+              type: string
+              examples: 
+                - "tanaka"
+            name:
+              type: string
+              examples: 
+                - "田中太郎"
+        modifiedAt:
+          type: string
+          examples:
+            - "2021-10-02T05:22:05.000Z"
+        modifier:
+          type: object
+          properties:
+            code:
+              type: string
+              examples: 
+                - "tanaka"
+            name:
+              type: string
+              examples: 
+                - "田中太郎"
     AdminNotes:
       title: App Admin Notes
       description: App Admin Notes
@@ -627,6 +640,7 @@ components:
           examples:
             - true
     GetAppAdminNotesRequest:
+      description: Get App Admin Notes Request
       type: object
       properties:
         app:
@@ -635,6 +649,7 @@ components:
           examples:
             - "123"
     GetAppAdminNotesResponse:
+      description: Get App Admin Notes Response
       allOf:
         - $ref: '#/components/schemas/AdminNotes'
         - type: object
@@ -644,6 +659,7 @@ components:
               examples:
                 - "2"
     UpdateAppAdminNotesRequest:
+      description: Update App Admin Notes Request
       type: object
       allOf:
         - $ref: '#/components/schemas/AdminNotes'
@@ -658,6 +674,7 @@ components:
               examples:
                 - "2"
     UpdateAppAdminNotesResponse:
+      description: Update App Admin Notes Response
       type: object
       properties:
         revision:
@@ -665,6 +682,7 @@ components:
           examples:
             - "2"
     AddAppRequest:
+      description: Add App Request
       type: object
       properties:
         name:
@@ -679,6 +697,7 @@ components:
       required:
         - name
     AddAppResponse:
+      description: Add App Response
       type: object
       properties:
         app:
@@ -688,6 +707,7 @@ components:
           type: string
           description: The revision number of the app.
     DeployAppSettingsRequest:
+      description: Deploy App Settings Request
       type: object
       properties:
         apps:
@@ -704,6 +724,7 @@ components:
       required:
         - apps
     DeployAppSettingsResponse:
+      description: Deploy App Settings Response
       type: object
       properties:
         apps:
@@ -718,6 +739,7 @@ components:
                 type: string
                 description: The deployment status of the app.
     GetGeneralAppSettingsResponse:
+      description: Get General App Settings Response
       type: object
       properties:
         name:
@@ -742,6 +764,7 @@ components:
           type: string
           description: The revision number of the app.
     GetAppDeployStatusResponse:
+      description: Get App Deploy Status Response
       type: object
       properties:
         apps:
@@ -761,6 +784,7 @@ components:
                   - FAIL
                   - CANCEL
     UploadFileRequest:
+      description: Upload File Request
       type: object
       properties:
         file:
@@ -770,17 +794,19 @@ components:
       required:
         - file
     UploadFileResponse:
+      description: Upload File Response
       type: object
       properties:
         fileKey:
           type: string
           description: The key of the uploaded file.
     FieldProperties:
+      description: Field Properties
       type: object
       additionalProperties:
         type: object
         properties:
-          type:
+          "type":
             type: string
           code:
             type: string
@@ -888,8 +914,8 @@ components:
           openGroup:
             type: boolean
           fields:
-            type: object
-            $ref: '#/components/schemas/FieldProperties'
+            allOf:
+              - $ref: '#/components/schemas/FieldProperties'
           enabled:
             type: boolean
           options:
@@ -901,7 +927,8 @@ components:
                   type: string
                 index:
                   type: integer
-    KintoeRestApiError:
+    KintoneRestApiError:
+      description: "The error response."
       type: object
       properties:
         id: 
@@ -924,8 +951,6 @@ components:
           description: "The error message."
           example: "The error message."
         bulkRequestIndex:
-          oneOf:
-            - type: number
-            - type: "undefined"
+          type: number
           description: "The index of the failed request when executing bulkRequest and one of the requests fails. This value is undefined otherwise."
 
