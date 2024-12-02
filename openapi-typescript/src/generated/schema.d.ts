@@ -13,8 +13,31 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** @description 1件のアプリの情報を取得する。 */
+        /**
+         * 1件のアプリの情報を取得する。
+         * @description 1件のアプリの情報を取得する。
+         */
         post: operations["getApp"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/k/v1/apps.json": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 複数のアプリの情報を取得する。
+         * @description 複数のアプリの情報を取得する。
+         */
+        get: operations["getApps"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -220,7 +243,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/app/form/fields.json": {
+    "/k/v1/preview/app/form/fields.json": {
         parameters: {
             query?: never;
             header?: never;
@@ -292,6 +315,29 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** @description Get App Response */
+        GetAppResponss: {
+            appId?: string;
+            code?: string;
+            name?: string;
+            description?: string;
+            spaceId?: string;
+            threadId?: string;
+            createdAt?: string;
+            creator?: {
+                code?: string;
+                name?: string;
+            };
+            modifiedAt?: string;
+            modifier?: {
+                code?: string;
+                name?: string;
+            };
+        };
+        /** Get Apps response */
+        GetAppsRespons: {
+            apps?: components["schemas"]["GetAppResponss"][];
+        };
         /**
          * App Admin Notes
          * @description App Admin Notes
@@ -300,20 +346,25 @@ export interface components {
             content?: string;
             includeInTemplateAndDuplicates?: boolean;
         };
+        /** @description Get App Admin Notes Request */
         GetAppAdminNotesRequest: {
             /** @description The App ID. */
             app?: string;
         };
+        /** @description Get App Admin Notes Response */
         GetAppAdminNotesResponse: components["schemas"]["AdminNotes"] & {
             revision?: string;
         };
+        /** @description Update App Admin Notes Request */
         UpdateAppAdminNotesRequest: components["schemas"]["AdminNotes"] & {
             app?: string;
             revision?: string;
         };
+        /** @description Update App Admin Notes Response */
         UpdateAppAdminNotesResponse: {
             revision?: string;
         };
+        /** @description Add App Request */
         AddAppRequest: {
             /** @description The name of the app. */
             name: string;
@@ -322,12 +373,14 @@ export interface components {
             /** @description The ID of the thread where the app will be created. */
             thread?: number;
         };
+        /** @description Add App Response */
         AddAppResponse: {
             /** @description The ID of the created app. */
             app?: string;
             /** @description The revision number of the app. */
             revision?: string;
         };
+        /** @description Deploy App Settings Request */
         DeployAppSettingsRequest: {
             apps: {
                 /** @description The ID of the app. */
@@ -336,6 +389,7 @@ export interface components {
                 revision?: string;
             }[];
         };
+        /** @description Deploy App Settings Response */
         DeployAppSettingsResponse: {
             apps?: {
                 /** @description The ID of the app. */
@@ -344,6 +398,7 @@ export interface components {
                 status?: string;
             }[];
         };
+        /** @description Get General App Settings Response */
         GetGeneralAppSettingsResponse: {
             /** @description The name of the app. */
             name?: string;
@@ -360,6 +415,7 @@ export interface components {
             /** @description The revision number of the app. */
             revision?: string;
         };
+        /** @description Get App Deploy Status Response */
         GetAppDeployStatusResponse: {
             apps?: {
                 /** @description The ID of the app. */
@@ -371,6 +427,7 @@ export interface components {
                 status?: "PROCESSING" | "SUCCESS" | "FAIL" | "CANCEL";
             }[];
         };
+        /** @description Upload File Request */
         UploadFileRequest: {
             /**
              * Format: binary
@@ -378,10 +435,12 @@ export interface components {
              */
             file: string;
         };
+        /** @description Upload File Response */
         UploadFileResponse: {
             /** @description The key of the uploaded file. */
             fileKey?: string;
         };
+        /** @description Field Properties */
         FieldProperties: {
             [key: string]: {
                 type?: string;
@@ -449,7 +508,8 @@ export interface components {
                 };
             };
         };
-        KintoeRestApiError: {
+        /** @description The error response. */
+        KintoneRestApiError: {
             /**
              * @description The ID of the error.
              * @example 123
@@ -473,7 +533,7 @@ export interface components {
              */
             message?: string;
             /** @description The index of the failed request when executing bulkRequest and one of the requests fails. This value is undefined otherwise. */
-            bulkRequestIndex?: number | Record<string, never>;
+            bulkRequestIndex?: number;
         };
     };
     responses: never;
@@ -491,12 +551,18 @@ export interface operations {
         parameters: {
             query?: never;
             header?: {
-                /** @description メソッドをGETにする */
+                /**
+                 * @description メソッドをGETにする
+                 * @example {
+                 *       "X-HTTP-Method-Override": "GET"
+                 *     }
+                 */
                 "X-HTTP-Method-Override"?: "GET";
             };
             path?: never;
             cookie?: never;
         };
+        /** @description GetApp Request Body */
         requestBody?: {
             content: {
                 /** @example {
@@ -514,24 +580,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": {
-                        appId?: string;
-                        code?: string;
-                        name?: string;
-                        description?: string;
-                        spaceId?: string;
-                        threadId?: string;
-                        createdAt?: string;
-                        creator?: {
-                            code?: string;
-                            name?: string;
-                        };
-                        modifiedAt?: string;
-                        modifier?: {
-                            code?: string;
-                            name?: string;
-                        };
-                    };
+                    "application/json": components["schemas"]["GetAppResponss"];
                 };
             };
             /** @description Bad Request */
@@ -540,7 +589,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoeRestApiError"];
+                    "application/json": components["schemas"]["KintoneRestApiError"];
                 };
             };
             /** @description Internal Server Error */
@@ -549,7 +598,64 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoeRestApiError"];
+                    "application/json": components["schemas"]["KintoneRestApiError"];
+                };
+            };
+        };
+    };
+    getApps: {
+        parameters: {
+            query?: {
+                /** @description アプリID */
+                ids?: string[];
+                /** @description アプリコード */
+                codes?: string[];
+                /** @description アプリ名 */
+                name?: string;
+                /** @description スペースID */
+                spaceIds?: string[];
+                offset?: number;
+                limit?: number;
+            };
+            header?: {
+                /**
+                 * @description メソッドをGETにする
+                 * @example {
+                 *       "X-HTTP-Method-Override": "GET"
+                 *     }
+                 */
+                "X-HTTP-Method-Override"?: "GET";
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetAppsRespons"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KintoneRestApiError"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KintoneRestApiError"];
                 };
             };
         };
@@ -911,7 +1017,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoeRestApiError"];
+                    "application/json": components["schemas"]["KintoneRestApiError"];
                 };
             };
             /** @description Bad Request */
@@ -920,7 +1026,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoeRestApiError"];
+                    "application/json": components["schemas"]["KintoneRestApiError"];
                 };
             };
         };
