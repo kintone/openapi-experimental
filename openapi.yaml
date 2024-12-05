@@ -499,6 +499,9 @@ paths:
           description: Not found
         '500':
           description: Internal server error
+  /k/v1/record.json:
+    $ref: './openapi/paths/record/record.yaml'
+
 components:
   securitySchemes:
     PasswordAuth:
