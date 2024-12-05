@@ -13,7 +13,10 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** @description 1件のアプリの情報を取得する。 */
+        /**
+         * 1件のアプリの情報を取得する。
+         * @description 1件のアプリの情報を取得する。
+         */
         post: operations["getApp"];
         delete?: never;
         options?: never;
@@ -220,7 +223,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/app/form/fields.json": {
+    "/k/v1/preview/app/form/fields.json": {
         parameters: {
             query?: never;
             header?: never;
@@ -292,6 +295,25 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** @description Get App Response */
+        GetAppResponss: {
+            appId?: string;
+            code?: string;
+            name?: string;
+            description?: string;
+            spaceId?: string;
+            threadId?: string;
+            createdAt?: string;
+            creator?: {
+                code?: string;
+                name?: string;
+            };
+            modifiedAt?: string;
+            modifier?: {
+                code?: string;
+                name?: string;
+            };
+        };
         /**
          * App Admin Notes
          * @description App Admin Notes
@@ -300,20 +322,20 @@ export interface components {
             content?: string;
             includeInTemplateAndDuplicates?: boolean;
         };
-        GetAppAdminNotesRequest: {
-            /** @description The App ID. */
-            app?: string;
-        };
+        /** @description Get App Admin Notes Response */
         GetAppAdminNotesResponse: components["schemas"]["AdminNotes"] & {
             revision?: string;
         };
+        /** @description Update App Admin Notes Request */
         UpdateAppAdminNotesRequest: components["schemas"]["AdminNotes"] & {
             app?: string;
             revision?: string;
         };
+        /** @description Update App Admin Notes Response */
         UpdateAppAdminNotesResponse: {
             revision?: string;
         };
+        /** @description Add App Request */
         AddAppRequest: {
             /** @description The name of the app. */
             name: string;
@@ -322,12 +344,14 @@ export interface components {
             /** @description The ID of the thread where the app will be created. */
             thread?: number;
         };
+        /** @description Add App Response */
         AddAppResponse: {
             /** @description The ID of the created app. */
             app?: string;
             /** @description The revision number of the app. */
             revision?: string;
         };
+        /** @description Deploy App Settings Request */
         DeployAppSettingsRequest: {
             apps: {
                 /** @description The ID of the app. */
@@ -336,6 +360,7 @@ export interface components {
                 revision?: string;
             }[];
         };
+        /** @description Deploy App Settings Response */
         DeployAppSettingsResponse: {
             apps?: {
                 /** @description The ID of the app. */
@@ -344,6 +369,7 @@ export interface components {
                 status?: string;
             }[];
         };
+        /** @description Get General App Settings Response */
         GetGeneralAppSettingsResponse: {
             /** @description The name of the app. */
             name?: string;
@@ -357,9 +383,40 @@ export interface components {
             };
             /** @description The theme of the app. */
             theme?: string;
+            titleField?: {
+                /**
+                 * @description The selection mode of the title field.
+                 * @enum {string}
+                 */
+                selectionMode?: "AUTO" | "MANUAL";
+                /** @description The code of the title field. */
+                code?: string;
+            };
+            /** @description Whether to enable thumbnails. */
+            enableThumbnails?: boolean;
+            /** @description Whether to enable bulk deletion. */
+            enableBulkDeletion?: boolean;
+            /** @description Whether to enable comments. */
+            enableComments?: boolean;
+            /** @description Whether to enable duplicate record. */
+            enableDuplicateRecord?: boolean;
+            /** @description Whether to enable inline record editing. */
+            enableInlineRecordEditing?: boolean;
+            /** @description The number precision. */
+            numberPrecision?: {
+                /** @description The number of digits. */
+                digits?: string;
+                /** @description The number of decimal places. */
+                decimalPlaces?: string;
+                /** @description The rounding mode. */
+                roundingMode?: string;
+            };
+            /** @description The first month of the fiscal year. */
+            firstMonthOfFiscalYear?: string;
             /** @description The revision number of the app. */
             revision?: string;
         };
+        /** @description Get App Deploy Status Response */
         GetAppDeployStatusResponse: {
             apps?: {
                 /** @description The ID of the app. */
@@ -371,6 +428,7 @@ export interface components {
                 status?: "PROCESSING" | "SUCCESS" | "FAIL" | "CANCEL";
             }[];
         };
+        /** @description Upload File Request */
         UploadFileRequest: {
             /**
              * Format: binary
@@ -378,10 +436,12 @@ export interface components {
              */
             file: string;
         };
+        /** @description Upload File Response */
         UploadFileResponse: {
             /** @description The key of the uploaded file. */
             fileKey?: string;
         };
+        /** @description Field Properties */
         FieldProperties: {
             [key: string]: {
                 type?: string;
@@ -410,7 +470,7 @@ export interface components {
                     code?: string;
                     type?: string;
                 }[];
-                referenceTSable?: {
+                referenceTable?: {
                     relatedApp?: {
                         app?: string;
                         code?: string;
@@ -420,7 +480,7 @@ export interface components {
                         relatedField?: string;
                     };
                     filterCond?: string;
-                    displayFields?: unknown[];
+                    displayFields?: string[];
                     sort?: string;
                     size?: string;
                 };
@@ -434,7 +494,7 @@ export interface components {
                         field?: string;
                         relatedField?: string;
                     }[];
-                    lookupPickerFields?: unknown[];
+                    lookupPickerFields?: string[];
                     filterCond?: string;
                     sort?: string;
                 };
@@ -449,7 +509,8 @@ export interface components {
                 };
             };
         };
-        KintoeRestApiError: {
+        /** @description The error response. */
+        KintoneRestApiError: {
             /**
              * @description The ID of the error.
              * @example 123
@@ -473,13 +534,18 @@ export interface components {
              */
             message?: string;
             /** @description The index of the failed request when executing bulkRequest and one of the requests fails. This value is undefined otherwise. */
-            bulkRequestIndex?: number | Record<string, never>;
+            bulkRequestIndex?: number;
         };
     };
     responses: never;
     parameters: {
         /** @description The Guest Space ID. */
         SpaceID: number;
+        /** @description Get App Admin Notes Request */
+        GetAppAdminNotesRequest: {
+            /** @description The App ID. */
+            app?: string;
+        };
     };
     requestBodies: never;
     headers: never;
@@ -491,12 +557,18 @@ export interface operations {
         parameters: {
             query?: never;
             header?: {
-                /** @description メソッドをGETにする */
+                /**
+                 * @description メソッドをGETにする
+                 * @example {
+                 *       "X-HTTP-Method-Override": "GET"
+                 *     }
+                 */
                 "X-HTTP-Method-Override"?: "GET";
             };
             path?: never;
             cookie?: never;
         };
+        /** @description GetApp Request Body */
         requestBody?: {
             content: {
                 /** @example {
@@ -514,24 +586,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": {
-                        appId?: string;
-                        code?: string;
-                        name?: string;
-                        description?: string;
-                        spaceId?: string;
-                        threadId?: string;
-                        createdAt?: string;
-                        creator?: {
-                            code?: string;
-                            name?: string;
-                        };
-                        modifiedAt?: string;
-                        modifier?: {
-                            code?: string;
-                            name?: string;
-                        };
-                    };
+                    "application/json": components["schemas"]["GetAppResponss"];
                 };
             };
             /** @description Bad Request */
@@ -540,7 +595,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoeRestApiError"];
+                    "application/json": components["schemas"]["KintoneRestApiError"];
                 };
             };
             /** @description Internal Server Error */
@@ -549,7 +604,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoeRestApiError"];
+                    "application/json": components["schemas"]["KintoneRestApiError"];
                 };
             };
         };
@@ -816,7 +871,8 @@ export interface operations {
     getAdminNotes: {
         parameters: {
             query?: {
-                query?: components["schemas"]["GetAppAdminNotesRequest"];
+                /** @description Get App Admin Notes Request */
+                query?: components["parameters"]["GetAppAdminNotesRequest"];
             };
             header?: never;
             path?: never;
@@ -838,7 +894,8 @@ export interface operations {
     getAdminNotesGuest: {
         parameters: {
             query?: {
-                query?: components["schemas"]["GetAppAdminNotesRequest"];
+                /** @description Get App Admin Notes Request */
+                query?: components["parameters"]["GetAppAdminNotesRequest"];
             };
             header?: never;
             path: {
@@ -863,7 +920,8 @@ export interface operations {
     getAdminNotesPreview: {
         parameters: {
             query?: {
-                query?: components["schemas"]["GetAppAdminNotesRequest"];
+                /** @description Get App Admin Notes Request */
+                query?: components["parameters"]["GetAppAdminNotesRequest"];
             };
             header?: never;
             path?: never;
@@ -911,7 +969,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoeRestApiError"];
+                    "application/json": components["schemas"]["KintoneRestApiError"];
                 };
             };
             /** @description Bad Request */
@@ -920,7 +978,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoeRestApiError"];
+                    "application/json": components["schemas"]["KintoneRestApiError"];
                 };
             };
         };
@@ -928,7 +986,8 @@ export interface operations {
     getAdminNotesGuestPreview: {
         parameters: {
             query?: {
-                query?: components["schemas"]["GetAppAdminNotesRequest"];
+                /** @description Get App Admin Notes Request */
+                query?: components["parameters"]["GetAppAdminNotesRequest"];
             };
             header?: never;
             path: {
@@ -954,7 +1013,10 @@ export interface operations {
         parameters: {
             query?: never;
             header?: never;
-            path?: never;
+            path: {
+                /** @description The Guest Space ID. */
+                SpaceID: components["parameters"]["SpaceID"];
+            };
             cookie?: never;
         };
         /** @description response body */
