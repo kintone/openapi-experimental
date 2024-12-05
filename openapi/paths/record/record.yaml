@@ -1,0 +1,58 @@
+get:
+    tags:
+      - Record
+    summary: Get a Record
+    description: Retrieves a record from Kintone.
+    operationId: getRecord
+    parameters:
+      - name: app
+        in: query
+        required: true
+        schema:
+          type:
+            - integer
+            - string
+        description: The App ID.
+      - name: id
+        in: query
+        required: true
+        schema:
+          type:
+            - integer
+            - string
+        description: The Record ID.
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                record:
+                  type: object
+                  additionalProperties: {}
+      '400':
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              $ref: '../../components/schemas/KintoneRestApiError.yaml'
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../../components/schemas/KintoneRestApiError.yaml'
+      '404':
+        description: Record not found
+        content:
+          application/json:
+            schema:
+              $ref: '../../components/schemas/KintoneRestApiError.yaml'
+      '500':
+        description: Internal server error
+        content:
+          application/json:
+            schema:
+              $ref: '../../components/schemas/KintoneRestApiError.yaml'

@@ -1,0 +1,12 @@
+KintoneRestApiError:
+  type: object
+  properties:
+    id:
+      type: string
+      description: The ID of the error.
+    code:
+      type: string
+      description: The code of the error.
+    message:
+      type: string
+      description: The error message.
