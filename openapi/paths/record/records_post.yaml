@@ -48,22 +48,22 @@ responses:
     content:
       application/json:
         schema:
-          $ref: '../../components/schemas/KintoneRestApiError.yaml'
+          $ref: '../../components/schemas/RestApiError.yaml'
   '401':
     description: Unauthorized
     content:
       application/json:
         schema:
-          $ref: '../../components/schemas/KintoneRestApiError.yaml'
+          $ref: '../../components/schemas/RestApiError.yaml'
   '404':
     description: App not found
     content:
       application/json:
         schema:
-          $ref: '../../components/schemas/KintoneRestApiError.yaml'
+          $ref: '../../components/schemas/RestApiError.yaml'
   '500':
     description: Internal server error
     content:
       application/json:
         schema:
-          $ref: '../../components/schemas/KintoneRestApiError.yaml'
+          $ref: '../../components/schemas/RestApiError.yaml'

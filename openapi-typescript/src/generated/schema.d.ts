@@ -588,7 +588,15 @@ export interface components {
             /** @description The index of the failed request when executing bulkRequest and one of the requests fails. This value is undefined otherwise. */
             bulkRequestIndex?: number;
         };
-        "KintoneRestApiError-2": unknown;
+        /** @description The error response. */
+        RestApiError: {
+            /** @description The ID of the error. */
+            id?: string;
+            /** @description The code of the error, to specify the type of error it is. */
+            code?: string;
+            /** @description The error message. */
+            message?: string;
+        };
     };
     responses: never;
     parameters: {
@@ -1219,7 +1227,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                    "application/json": components["schemas"]["RestApiError"];
                 };
             };
             /** @description Unauthorized */
@@ -1228,7 +1236,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                    "application/json": components["schemas"]["RestApiError"];
                 };
             };
             /** @description Record not found */
@@ -1237,7 +1245,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                    "application/json": components["schemas"]["RestApiError"];
                 };
             };
             /** @description Internal server error */
@@ -1246,7 +1254,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                    "application/json": components["schemas"]["RestApiError"];
                 };
             };
         };
@@ -1300,7 +1308,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                    "application/json": components["schemas"]["RestApiError"];
                 };
             };
             /** @description Unauthorized */
@@ -1309,7 +1317,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                    "application/json": components["schemas"]["RestApiError"];
                 };
             };
             /** @description Record not found */
@@ -1318,7 +1326,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                    "application/json": components["schemas"]["RestApiError"];
                 };
             };
             /** @description Internal server error */
@@ -1327,7 +1335,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                    "application/json": components["schemas"]["RestApiError"];
                 };
             };
         };
@@ -1374,7 +1382,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                    "application/json": components["schemas"]["RestApiError"];
                 };
             };
             /** @description Unauthorized */
@@ -1383,7 +1391,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                    "application/json": components["schemas"]["RestApiError"];
                 };
             };
             /** @description App not found */
@@ -1392,7 +1400,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                    "application/json": components["schemas"]["RestApiError"];
                 };
             };
             /** @description Internal server error */
@@ -1401,7 +1409,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                    "application/json": components["schemas"]["RestApiError"];
                 };
             };
         };
@@ -1448,7 +1456,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                    "application/json": components["schemas"]["RestApiError"];
                 };
             };
             /** @description Unauthorized */
@@ -1457,7 +1465,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                    "application/json": components["schemas"]["RestApiError"];
                 };
             };
             /** @description Records not found */
@@ -1466,7 +1474,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                    "application/json": components["schemas"]["RestApiError"];
                 };
             };
             /** @description Internal server error */
@@ -1475,7 +1483,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                    "application/json": components["schemas"]["RestApiError"];
                 };
             };
         };
@@ -1522,7 +1530,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                    "application/json": components["schemas"]["RestApiError"];
                 };
             };
             /** @description Unauthorized */
@@ -1531,7 +1539,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                    "application/json": components["schemas"]["RestApiError"];
                 };
             };
             /** @description App not found */
@@ -1540,7 +1548,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                    "application/json": components["schemas"]["RestApiError"];
                 };
             };
             /** @description Internal server error */
@@ -1549,7 +1557,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                    "application/json": components["schemas"]["RestApiError"];
                 };
             };
         };
