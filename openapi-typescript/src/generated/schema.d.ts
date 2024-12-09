@@ -1263,10 +1263,8 @@ export interface operations {
                     id?: number | string;
                     /** @description The key to update the record. */
                     updateKey?: {
-                        [key: string]: {
-                            field?: string;
-                            value?: string;
-                        };
+                        field?: string;
+                        value?: string;
                     };
                     /** @description The record to update. */
                     record?: {

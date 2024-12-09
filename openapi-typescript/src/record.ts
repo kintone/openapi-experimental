@@ -40,6 +40,22 @@ const main = async () => {
         }
     });
     console.log(resp3.data);
+
+    const resp4 = await client.PUT("/k/v1/record.json", {
+        'body': {
+            'app': 2,
+            'updateKey': {
+                field: "文字列__1行_",
+                value: "1234"
+            },
+            'record':  {
+                "文字列__1行_": {
+                    value: "111"
+                }
+            }
+        }
+    });
+    console.log(resp4.data);
 }
 
 main();

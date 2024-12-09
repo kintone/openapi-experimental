@@ -23,13 +23,11 @@ requestBody:
           updateKey:
             type: object
             description: The key to update the record.
-            additionalProperties:
-              type: object
-              properties:
-                field:
-                  type: string
-                value:
-                  type: string
+            properties:
+              field:
+                type: string
+              value:
+                type: string
           record:
             type: object
             description: The record to update.
