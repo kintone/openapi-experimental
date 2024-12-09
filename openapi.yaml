@@ -511,6 +511,8 @@ paths:
       $ref: './openapi/paths/record/records.yaml'
     post:
       $ref: './openapi/paths/record/records_post.yaml'
+    put:
+      $ref: './openapi/paths/record/records_put.yaml'
 
 components:
   securitySchemes:

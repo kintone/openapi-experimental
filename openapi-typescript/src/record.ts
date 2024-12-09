@@ -75,6 +75,38 @@ const main = async () => {
         }
     });
     console.log(resp5.data)
+
+    const resp6 = await client.PUT("/k/v1/records.json", {
+        body: {
+            app: 2,
+            records: [
+                {
+                    "id": 1,
+                    record: {
+                        "文字列__1行_": {
+                            value: "abc"
+                        },
+                        "文字列__1行__0": {
+                            value: "あああ"
+                        }
+                    }
+                },
+                {
+                    "id": 2,
+                    record: {
+                        "文字列__1行_": {
+                            value: "efg"
+                        },
+                        "文字列__1行__0": {
+                            value: "いいい"
+                        }
+                    }
+                },
+
+            ]
+        }
+    });
+    console.log(resp6.data!.records![0].revision)
 }
 
 main();

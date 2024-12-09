@@ -331,7 +331,11 @@ export interface paths {
          * @description Retrieves records from Kintone.
          */
         get: operations["getRecords"];
-        put?: never;
+        /**
+         * Update Records
+         * @description Updates multiple records in Kintone.
+         */
+        put: operations["updateRecords"];
         /**
          * Add Records
          * @description Adds multiple records to Kintone.
@@ -1469,6 +1473,89 @@ export interface operations {
                 };
             };
             /** @description Records not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Internal server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    updateRecords: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The App ID. */
+                    app?: number | string;
+                    /** @description The records to update. */
+                    records?: {
+                        /** @description The Record ID. */
+                        id?: number | string;
+                        /** @description The record to update. */
+                        record?: {
+                            [key: string]: {
+                                value?: string;
+                            };
+                        };
+                        /** @description The expected revision number. */
+                        revision?: string;
+                    }[];
+                };
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        records?: {
+                            /** @description The ID of the updated record. */
+                            id?: number | string;
+                            /** @description The revision number of the updated record. */
+                            revision?: string;
+                        }[];
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Record not found */
             404: {
                 headers: {
                     [name: string]: unknown;
