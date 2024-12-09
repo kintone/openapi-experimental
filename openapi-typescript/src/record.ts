@@ -56,6 +56,25 @@ const main = async () => {
         }
     });
     console.log(resp4.data);
+
+    const resp5 = await client.POST("/k/v1/records.json", {
+        body: {
+            app: 2,
+            records: [
+                {
+                    "文字列__1行_": {
+                        value: "a1233"
+                    }
+                },
+                {
+                    "文字列__1行_": {
+                        value: "a4563"
+                    }
+                }
+            ]
+        }
+    });
+    console.log(resp5.data)
 }
 
 main();

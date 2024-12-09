@@ -332,7 +332,11 @@ export interface paths {
          */
         get: operations["getRecords"];
         put?: never;
-        post?: never;
+        /**
+         * Add Records
+         * @description Adds multiple records to Kintone.
+         */
+        post: operations["addRecords"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1457,6 +1461,80 @@ export interface operations {
                 };
             };
             /** @description Records not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                };
+            };
+            /** @description Internal server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                };
+            };
+        };
+    };
+    addRecords: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The App ID. */
+                    app?: number | string;
+                    /** @description The records to add. */
+                    records?: {
+                        [key: string]: {
+                            value?: string;
+                        };
+                    }[];
+                };
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description The IDs of the added records. */
+                        ids?: string[];
+                        /** @description The revision numbers of the added records. */
+                        revisions?: string[];
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                };
+            };
+            /** @description App not found */
             404: {
                 headers: {
                     [name: string]: unknown;
