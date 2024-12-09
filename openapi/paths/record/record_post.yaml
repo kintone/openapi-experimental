@@ -1,25 +1,26 @@
 tags:
   - Record
-summary: Get a Record
-description: Retrieves a record from Kintone.
-operationId: getRecord
-parameters:
-  - name: app
-    in: query
-    required: true
-    schema:
-      type:
-        - integer
-        - string
-    description: The App ID.
-  - name: id
-    in: query
-    required: true
-    schema:
-      type:
-        - integer
-        - string
-    description: The Record ID.
+summary: Add a Record
+description: Adds a record to Kintone.
+operationId: addRecord
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          app:
+            type: integer
+            description: The App ID.
+          record:
+            type: object
+            description: The record to add.
+            additionalProperties:
+              type: object
+              properties:
+                value:
+                  type: string
 responses:
   '200':
     description: Successful response
@@ -28,18 +29,12 @@ responses:
         schema:
           type: object
           properties:
-            record:
-              type: object
-              additionalProperties:
-                type: object
-                properies:
-                  type:
-                    type: string
-                  value:
-                    type:
-                      - object:
-                        additionalProperties: true
-                      - string
+            id:
+              type: string
+              description: The ID of the added record.
+            revision:
+              type: string
+              description: The revision number of the added record.
   '400':
     description: Bad request
     content:
@@ -53,7 +48,7 @@ responses:
         schema:
           $ref: '../../components/schemas/KintoneRestApiError.yaml'
   '404':
-    description: Record not found
+    description: App not found
     content:
       application/json:
         schema:

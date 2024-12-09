@@ -303,7 +303,11 @@ export interface paths {
          * @description Retrieves a record from Kintone.
          */
         get: operations["getRecord"];
-        put?: never;
+        /**
+         * Update a Record
+         * @description Updates a record in Kintone.
+         */
+        put: operations["updateRecord"];
         /**
          * Add a Record
          * @description Adds a record to Kintone.
@@ -1202,6 +1206,89 @@ export interface operations {
                         record?: {
                             [key: string]: Record<string, never>;
                         };
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                };
+            };
+            /** @description Record not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                };
+            };
+            /** @description Internal server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                };
+            };
+        };
+    };
+    updateRecord: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The App ID. */
+                    app?: number | string;
+                    /** @description The Record ID. */
+                    id?: number | string;
+                    /** @description The key to update the record. */
+                    updateKey?: {
+                        [key: string]: {
+                            field?: string;
+                            value?: string;
+                        };
+                    };
+                    /** @description The record to update. */
+                    record?: {
+                        [key: string]: {
+                            value?: string;
+                        };
+                    };
+                    /** @description The expected revision number. */
+                    revision?: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description The revision number of the updated record. */
+                        revision?: string;
                     };
                 };
             };

@@ -500,7 +500,12 @@ paths:
         '500':
           description: Internal server error
   /k/v1/record.json:
-    $ref: './openapi/paths/record/record.yaml'
+    get:
+      $ref: './openapi/paths/record/record.yaml'
+    post:
+      $ref: './openapi/paths/record/record_post.yaml'
+    put:
+      $ref: './openapi/paths/record/record_put.yaml'
   /k/v1/records.json:
     $ref: './openapi/paths/record/records.yaml'
 
