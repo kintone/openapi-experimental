@@ -513,6 +513,8 @@ paths:
       $ref: './openapi/paths/record/records_post.yaml'
     put:
       $ref: './openapi/paths/record/records_put.yaml'
+    delete:
+      $ref: './openapi/paths/record/records_delete.yaml'
 
 components:
   securitySchemes:

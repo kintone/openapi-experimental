@@ -341,7 +341,11 @@ export interface paths {
          * @description Adds multiple records to Kintone.
          */
         post: operations["addRecords"];
-        delete?: never;
+        /**
+         * Delete records
+         * @description Delete multiple records from an app.
+         */
+        delete: operations["deleteRecords"];
         options?: never;
         head?: never;
         patch?: never;
@@ -1640,6 +1644,59 @@ export interface operations {
             };
             /** @description Internal server error */
             500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    deleteRecords: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Request payload for deleting records */
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The ID of the app. */
+                    app: number | string;
+                    /** @description The IDs of the records to delete. */
+                    ids: number[];
+                    /** @description The revision numbers of the records to delete. */
+                    revisions?: number[];
+                };
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description The revision number of the app. */
+                        revision?: string;
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Not found */
+            404: {
                 headers: {
                     [name: string]: unknown;
                 };

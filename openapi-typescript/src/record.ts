@@ -107,6 +107,15 @@ const main = async () => {
         }
     });
     console.log(resp6.data!.records![0].revision)
+
+    const resp7 = await client.DELETE("/k/v1/records.json", {
+        body: {
+            app: 2,
+            ids: [1, 2]
+        }
+    });
+
+    console.log(resp7.data)
 }
 
 main();
