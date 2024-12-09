@@ -27,7 +27,7 @@ type CreateIteratorMethod<
   ) => InitParam<Init>,
   hasNext: (
     init: InitParam<Init>,
-    responce: FetchResponse<Paths[Path][Method], Init, Media> | null
+    response: FetchResponse<Paths[Path][Method], Init, Media> | null
   ) => boolean,
   init: InitParam<Init>
 ) => AsyncGenerator<FetchResponse<Paths[Path][Method], Init, Media>>;
@@ -52,17 +52,17 @@ export function iterator<Paths extends {} = any, Media extends MediaType = any>(
   async function* createIteratorMethod<Method extends HttpMethod>(
     url: any,
     handleRequest: (init: any, previousResult: any) => any,
-    hasNext: (init: any, responce: any) => boolean,
+    hasNext: (init: any, response: any) => boolean,
     init: any,
     method: ClientMethod<Paths, Method, Media>
   ) {
     let _init = init;
-    let responce = null;
+    let response = null;
     while (true) {
-      if (!hasNext(_init, responce)) return;
-      _init = handleRequest(_init, responce);
-      responce = await method(url, _init);
-      yield responce;
+      if (!hasNext(_init, response)) return;
+      _init = handleRequest(_init, response);
+      response = await method(url, _init);
+      yield response;
     }
   }
 
