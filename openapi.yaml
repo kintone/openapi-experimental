@@ -499,6 +499,23 @@ paths:
           description: Not found
         '500':
           description: Internal server error
+  /k/v1/record.json:
+    get:
+      $ref: './openapi/paths/record/record.yaml'
+    post:
+      $ref: './openapi/paths/record/record_post.yaml'
+    put:
+      $ref: './openapi/paths/record/record_put.yaml'
+  /k/v1/records.json:
+    get:
+      $ref: './openapi/paths/record/records.yaml'
+    post:
+      $ref: './openapi/paths/record/records_post.yaml'
+    put:
+      $ref: './openapi/paths/record/records_put.yaml'
+    delete:
+      $ref: './openapi/paths/record/records_delete.yaml'
+
 components:
   securitySchemes:
     PasswordAuth:
