@@ -28,6 +28,18 @@ const main = async () => {
 
     console.log(resp2.data!.records![0]["文字列__1行_"].type);
     console.log(resp2.data!.records![0]["文字列__1行_"].value);
+
+    const resp3 = await client.POST("/k/v1/record.json", {
+        'body': {
+            'app': 2,
+            'record':  {
+                "文字列__1行_": {
+                    value: "123"
+                }
+            }
+        }
+    });
+    console.log(resp3.data);
 }
 
 main();
