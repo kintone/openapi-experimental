@@ -311,6 +311,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/k/v1/records.json": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Records
+         * @description Retrieves records from Kintone.
+         */
+        get: operations["getRecords"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -1176,7 +1196,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         record?: {
-                            [key: string]: unknown;
+                            [key: string]: Record<string, never>;
                         };
                     };
                 };
@@ -1200,6 +1220,80 @@ export interface operations {
                 };
             };
             /** @description Record not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                };
+            };
+            /** @description Internal server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                };
+            };
+        };
+    };
+    getRecords: {
+        parameters: {
+            query: {
+                /** @description The App ID. */
+                app: number | string;
+                /** @description The query string to filter records. */
+                query?: string;
+                /** @description The fields to retrieve. */
+                fields?: string[];
+                /** @description Whether to include the total count of records. */
+                totalCount?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        records?: {
+                            [key: string]: {
+                                type?: string;
+                                value?: Record<string, never> | string;
+                            };
+                        }[];
+                        /** @description The total count of records. */
+                        totalCount?: string;
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KintoneRestApiError-2"];
+                };
+            };
+            /** @description Records not found */
             404: {
                 headers: {
                     [name: string]: unknown;

@@ -501,6 +501,8 @@ paths:
           description: Internal server error
   /k/v1/record.json:
     $ref: './openapi/paths/record/record.yaml'
+  /k/v1/records.json:
+    $ref: './openapi/paths/record/records.yaml'
 
 components:
   securitySchemes:

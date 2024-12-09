@@ -8,9 +8,26 @@ const main = async () => {
             "X-Cybozu-Authorization": "QWRtaW5pc3RyYXRvcjpjeWJvenU="
         },
     });
-    //
+    // record.json
     const resp = await client.GET("/k/v1/record.json", {params: {query: {app: 2, id: "2"}}});
-    console.log(resp.data)
+
+    console.log(resp.data!.record!.Updated_by.type);
+    console.log(resp.data!.record!.Updated_by.value);
+
+    // records.json
+    const resp2 = await client.GET("/k/v1/records.json", {
+        params: {
+            query: {
+                app: 2,
+                // fields: ["文字列__1行_"],
+                // query: '文字列__1行_ = "あああ"',
+                totalCount: true,
+            }
+        }
+    });
+
+    console.log(resp2.data!.records![0]["文字列__1行_"].type);
+    console.log(resp2.data!.records![0]["文字列__1行_"].value);
 }
 
 main();
