@@ -116,6 +116,26 @@ const main = async () => {
     });
 
     console.log(resp7.data)
+    
+    // const { data, error } = await client.POST("/k/v1/records/cursor.json", {
+    //     body: {
+    //         app: 2,
+    //     }
+    // });
+    //
+    // console.log(data!.id);
+    // console.log(error);
+
+    const { data, error } = await client.GET("/k/v1/records/cursor.json", {
+        params: {
+            query: {
+                id: "600e2669-601e-443b-9cc0-152faee1e1ec",
+            }
+        }
+    });
+
+    console.log(data);
+    console.log(error);
 }
 
 main();

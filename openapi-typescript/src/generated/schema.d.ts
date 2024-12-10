@@ -351,6 +351,30 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/k/v1/records/cursor.json": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get records by cursor
+         * @description Retrieve records using a cursor.
+         */
+        get: operations["getRecordsByCursor"];
+        put?: never;
+        /**
+         * Create a cursor
+         * @description Create a cursor to retrieve records in batches.
+         */
+        post: operations["createCursor"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -1683,6 +1707,110 @@ export interface operations {
                     "application/json": {
                         /** @description The revision number of the app. */
                         revision?: string;
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    getRecordsByCursor: {
+        parameters: {
+            query: {
+                /** @description The cursor ID. */
+                id: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        records?: {
+                            [key: string]: unknown;
+                        }[];
+                        /** @description Indicates if there are more records to retrieve. */
+                        next?: boolean;
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    createCursor: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Request payload for creating a cursor */
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The ID of the app. */
+                    app: number;
+                    /** @description The fields to retrieve. */
+                    fields?: string[];
+                    /** @description The query string to filter records. */
+                    query?: string;
+                    /** @description The number of records to retrieve in each batch. */
+                    size?: number;
+                };
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description The ID of the created cursor. */
+                        id?: string;
+                        /** @description The total number of records that match the query. */
+                        totalCount?: number;
                     };
                 };
             };
