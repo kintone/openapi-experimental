@@ -164,13 +164,30 @@ const main = async () => {
     //     }
     // });
 
-    const { data, error } = await client.DELETE("/k/v1/record/comment.json", {
-        params: {
-            query: {
-                app: 2,
-                record: 8,
-                comment: 3
-            }
+    // const { data, error } = await client.DELETE("/k/v1/record/comment.json", {
+    //     params: {
+    //         query: {
+    //             app: 2,
+    //             record: 8,
+    //             comment: 3
+    //         }
+    //     }
+    // });
+
+    // const { data, error } = await client.PUT("/k/v1/record/assignees.json", {
+    //     body: {
+    //         app: 2,
+    //         id: 8,
+    //         assignees: ['Administrator']
+    //     }
+    // });
+
+    const { data, error } = await client.PUT("/k/v1/record/status.json", {
+        body: {
+            app: 2,
+            id: 8,
+            action: "処理開始",
+            assignees: ['Administrator']
         }
     });
 

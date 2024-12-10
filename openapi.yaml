@@ -530,6 +530,13 @@ paths:
       $ref: './openapi/paths/record/comment_post.yaml'
     delete:
       $ref: './openapi/paths/record/comment_delete.yaml'
+  /k/v1/record/assignees.json:
+    put:
+      $ref: './openapi/paths/record/assignees_put.yaml'
+  /k/v1/record/status.json:
+    put:
+      $ref: './openapi/paths/record/status_put.yaml'
+
 
 components:
   securitySchemes:

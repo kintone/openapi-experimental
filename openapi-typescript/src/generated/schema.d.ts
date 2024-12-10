@@ -423,6 +423,46 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/k/v1/record/assignees.json": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Update record assignees
+         * @description Update the assignees of a specific record in Kintone.
+         */
+        put: operations["updateRecordAssignees"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/k/v1/record/status.json": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Update record status
+         * @description Update the status of a specific record in Kintone.
+         */
+        put: operations["updateRecordStatus"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -2075,6 +2115,114 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    updateRecordAssignees: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Request payload for updating assignees */
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The ID of the app. */
+                    app: number;
+                    /** @description The ID of the record. */
+                    id: number;
+                    /** @description The list of assignees. */
+                    assignees: string[];
+                };
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description The revision number of the record. */
+                        revision?: string;
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    updateRecordStatus: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Request payload for updating record status */
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The ID of the app. */
+                    app: number;
+                    /** @description The ID of the record. */
+                    id: number;
+                    /** @description The action to perform on the record. */
+                    action: string;
+                    /** @description The assignee of the record. */
+                    assignee?: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description The revision number of the record. */
+                        revision?: string;
+                    };
+                };
             };
             /** @description Bad request */
             400: {
