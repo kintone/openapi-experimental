@@ -369,7 +369,11 @@ export interface paths {
          * @description Create a cursor to retrieve records in batches.
          */
         post: operations["createCursor"];
-        delete?: never;
+        /**
+         * Delete a cursor
+         * @description Delete a cursor to stop retrieving records in batches.
+         */
+        delete: operations["deleteCursor"];
         options?: never;
         head?: never;
         patch?: never;
@@ -1813,6 +1817,45 @@ export interface operations {
                         totalCount?: number;
                     };
                 };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    deleteCursor: {
+        parameters: {
+            query: {
+                /** @description The cursor ID. */
+                id: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No content, cursor deleted successfully */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
             /** @description Bad request */
             400: {

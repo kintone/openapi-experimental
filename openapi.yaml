@@ -520,6 +520,8 @@ paths:
       $ref: './openapi/paths/record/cursor_get.yaml'
     post:
       $ref: './openapi/paths/record/cursor_post.yaml'
+    delete:
+      $ref: './openapi/paths/record/cursor_delete.yaml'
 
 components:
   securitySchemes:
