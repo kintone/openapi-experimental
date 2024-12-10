@@ -379,6 +379,50 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/k/v1/record/comments.json": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get record comments
+         * @description Retrieve comments for a specific record.
+         */
+        get: operations["getRecordComments"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/k/v1/record/comment.json": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Add a comment to a record
+         * @description Add a comment to a specific record in Kintone.
+         */
+        post: operations["addRecordComment"];
+        /**
+         * Delete a comment from a record
+         * @description Delete a specific comment from a record in Kintone.
+         */
+        delete: operations["deleteRecordComment"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -1851,6 +1895,181 @@ export interface operations {
         requestBody?: never;
         responses: {
             /** @description No content, cursor deleted successfully */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    getRecordComments: {
+        parameters: {
+            query: {
+                /** @description The ID of the app. */
+                app: number;
+                /** @description The ID of the record. */
+                record: number;
+                /** @description The order in which to retrieve comments. */
+                order?: "asc" | "desc";
+                /** @description The offset for pagination. */
+                offset?: number;
+                /** @description The maximum number of comments to retrieve. */
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        comments?: {
+                            /** @description The ID of the comment. */
+                            id?: number;
+                            /** @description The text of the comment. */
+                            text?: string;
+                            /**
+                             * Format: date-time
+                             * @description The creation time of the comment.
+                             */
+                            createdAt?: string;
+                            creator?: {
+                                /** @description The code of the creator. */
+                                code?: string;
+                                /** @description The name of the creator. */
+                                name?: string;
+                            };
+                        }[];
+                        /** @description Indicates if there are older comments. */
+                        older?: boolean;
+                        /** @description Indicates if there are newer comments. */
+                        newer?: boolean;
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    addRecordComment: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Request payload for adding a comment */
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The ID of the app. */
+                    app: number;
+                    /** @description The ID of the record. */
+                    record: number;
+                    comment: {
+                        /** @description The text of the comment. */
+                        text?: string;
+                        mentions?: {
+                            /** @description The code of the user to mention. */
+                            code?: string;
+                            /** @description The type of the mention (e.g., USER, GROUP, etc.). */
+                            type?: string;
+                        }[];
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description The ID of the added comment. */
+                        id?: number;
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    deleteRecordComment: {
+        parameters: {
+            query: {
+                /** @description The ID of the app. */
+                app: number;
+                /** @description The ID of the record. */
+                record: number;
+                /** @description The ID of the comment. */
+                comment: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No content, comment deleted successfully */
             204: {
                 headers: {
                     [name: string]: unknown;

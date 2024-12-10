@@ -137,10 +137,39 @@ const main = async () => {
     // console.log(data);
     // console.log(error);
 
-    const { data, error } = await client.DELETE("/k/v1/records/cursor.json", {
+    // const { data, error } = await client.DELETE("/k/v1/records/cursor.json", {
+    //     params: {
+    //         query: {
+    //             id: "1ccb4f8b-aff4-49e0-aa27-c7aa59c7d0e4",
+    //         }
+    //     }
+    // });
+
+    // const { data, error } = await client.GET("/k/v1/record/comments.json", {
+    //     params: {
+    //         query: {
+    //             app: 2,
+    //             record: 8
+    //         }
+    //     }
+    // });
+
+    // const { data, error } = await client.POST("/k/v1/record/comment.json", {
+    //     body: {
+    //         app: 2,
+    //         record: 8,
+    //         comment: {
+    //             text: "test"
+    //         }
+    //     }
+    // });
+
+    const { data, error } = await client.DELETE("/k/v1/record/comment.json", {
         params: {
             query: {
-                id: "1ccb4f8b-aff4-49e0-aa27-c7aa59c7d0e4",
+                app: 2,
+                record: 8,
+                comment: 3
             }
         }
     });

@@ -522,6 +522,14 @@ paths:
       $ref: './openapi/paths/record/cursor_post.yaml'
     delete:
       $ref: './openapi/paths/record/cursor_delete.yaml'
+  /k/v1/record/comments.json:
+    get:
+      $ref: './openapi/paths/record/comments_get.yaml'
+  /k/v1/record/comment.json:
+    post:
+      $ref: './openapi/paths/record/comment_post.yaml'
+    delete:
+      $ref: './openapi/paths/record/comment_delete.yaml'
 
 components:
   securitySchemes:
