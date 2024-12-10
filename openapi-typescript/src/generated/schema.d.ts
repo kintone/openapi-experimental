@@ -483,6 +483,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/k/v1/records/acl/evaluate.json": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Evaluate record permissions
+         * @description Evaluate the permissions of a specific record in Kintone.
+         */
+        get: operations["evaluateRecordPermissions"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -2301,6 +2321,75 @@ export interface operations {
                             id?: number;
                             /** @description The revision number of the record. */
                             revision?: string;
+                        }[];
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    evaluateRecordPermissions: {
+        parameters: {
+            query: {
+                /** @description The ID of the app. */
+                app: number;
+                /** @description The IDs of the records. */
+                ids: number[];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        rights?: {
+                            /** @description レコードID */
+                            id?: string;
+                            record?: {
+                                /** @description レコードの閲覧が可能かどうか true：閲覧できる false：閲覧できない メンテナンスモードの場合は、「false」が設定されます。
+                                 *      */
+                                viewable?: boolean;
+                                /** @description レコードの編集が可能かどうか true：編集できる false：編集できない メンテナンスモードの場合は、「false」が設定されます。
+                                 *      */
+                                editable?: boolean;
+                                /** @description レコードの削除が可能かどうか true：削除できる false：削除できない メンテナンスモードの場合は、「false」が設定されます。
+                                 *      */
+                                deletable?: boolean;
+                            };
+                            fields?: {
+                                [key: string]: {
+                                    /** @description フィールドの閲覧が可能かどうか true：閲覧できる false：閲覧できない メンテナンスモードの場合は、「false」が設定されます。
+                                     *      */
+                                    viewable?: boolean;
+                                    /** @description フィールドの編集が可能かどうか true：編集できる false：編集できない メンテナンスモードの場合は、「false」が設定されます。
+                                     *      */
+                                    editable?: boolean;
+                                };
+                            };
                         }[];
                     };
                 };

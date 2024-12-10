@@ -539,7 +539,9 @@ paths:
   /k/v1/records/status.json:
     put:
       $ref: './openapi/paths/record/records_status_put.yaml'
-
+  /k/v1/records/acl/evaluate.json:
+    get:
+      $ref: './openapi/paths/record/records_acl_evaluate.yaml'
 
 components:
   securitySchemes:
