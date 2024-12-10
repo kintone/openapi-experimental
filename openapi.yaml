@@ -535,7 +535,10 @@ paths:
       $ref: './openapi/paths/record/assignees_put.yaml'
   /k/v1/record/status.json:
     put:
-      $ref: './openapi/paths/record/status_put.yaml'
+      $ref: './openapi/paths/record/record_status_put.yaml'
+  /k/v1/records/status.json:
+    put:
+      $ref: './openapi/paths/record/records_status_put.yaml'
 
 
 components:

@@ -182,12 +182,28 @@ const main = async () => {
     //     }
     // });
 
-    const { data, error } = await client.PUT("/k/v1/record/status.json", {
+    // const { data, error } = await client.PUT("/k/v1/record/status.json", {
+    //     body: {
+    //         app: 2,
+    //         id: 8,
+    //         action: "処理開始",
+    //         assignees: ['Administrator']
+    //     }
+    // });
+
+    const { data, error } = await client.PUT("/k/v1/records/status.json", {
         body: {
             app: 2,
-            id: 8,
-            action: "処理開始",
-            assignees: ['Administrator']
+            records: [{
+                id: 6,
+                action: "処理開始",
+                assignees: ['Administrator']
+            }, {
+                id: 7,
+                action: "処理開始",
+                assignees: ['Administrator']
+
+            }]
         }
     });
 
