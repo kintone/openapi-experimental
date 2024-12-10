@@ -291,6 +291,238 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/k/v1/record.json": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get a Record
+         * @description Retrieves a record from Kintone.
+         */
+        get: operations["getRecord"];
+        /**
+         * Update a Record
+         * @description Updates a record in Kintone.
+         */
+        put: operations["updateRecord"];
+        /**
+         * Add a Record
+         * @description Adds a record to Kintone.
+         */
+        post: operations["addRecord"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/k/v1/records.json": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Records
+         * @description Retrieves records from Kintone.
+         */
+        get: operations["getRecords"];
+        /**
+         * Update Records
+         * @description Updates multiple records in Kintone.
+         */
+        put: operations["updateRecords"];
+        /**
+         * Add Records
+         * @description Adds multiple records to Kintone.
+         */
+        post: operations["addRecords"];
+        /**
+         * Delete records
+         * @description Delete multiple records from an app.
+         */
+        delete: operations["deleteRecords"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/k/v1/records/cursor.json": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get records by cursor
+         * @description Retrieve records using a cursor.
+         */
+        get: operations["getRecordsByCursor"];
+        put?: never;
+        /**
+         * Create a cursor
+         * @description Create a cursor to retrieve records in batches.
+         */
+        post: operations["createCursor"];
+        /**
+         * Delete a cursor
+         * @description Delete a cursor to stop retrieving records in batches.
+         */
+        delete: operations["deleteCursor"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/k/v1/record/comments.json": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get record comments
+         * @description Retrieve comments for a specific record.
+         */
+        get: operations["getRecordComments"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/k/v1/record/comment.json": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Add a comment to a record
+         * @description Add a comment to a specific record in Kintone.
+         */
+        post: operations["addRecordComment"];
+        /**
+         * Delete a comment from a record
+         * @description Delete a specific comment from a record in Kintone.
+         */
+        delete: operations["deleteRecordComment"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/k/v1/record/assignees.json": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Update record assignees
+         * @description Update the assignees of a specific record in Kintone.
+         */
+        put: operations["updateRecordAssignees"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/k/v1/record/status.json": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Update record status
+         * @description Update the status of a specific record in Kintone.
+         */
+        put: operations["updateRecordStatus"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/k/v1/records/status.json": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Update multiple record statuses
+         * @description Update the statuses of multiple records in Kintone.
+         */
+        put: operations["updateRecordStatuses"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/k/v1/records/acl/evaluate.json": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Evaluate record permissions
+         * @description Evaluate the permissions of a specific record in Kintone.
+         */
+        get: operations["evaluateRecordPermissions"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/k/v1/bulkRequest.json": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Bulk record operations for multiple apps
+         * @description Execute multiple API operations on records across multiple apps in a single request.
+         */
+        post: operations["bulkRecordOperations"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -535,6 +767,15 @@ export interface components {
             message?: string;
             /** @description The index of the failed request when executing bulkRequest and one of the requests fails. This value is undefined otherwise. */
             bulkRequestIndex?: number;
+        };
+        /** @description The error response. */
+        RestApiError: {
+            /** @description The ID of the error. */
+            id?: string;
+            /** @description The code of the error, to specify the type of error it is. */
+            code?: string;
+            /** @description The error message. */
+            message?: string;
         };
     };
     responses: never;
@@ -1130,6 +1371,1125 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+        };
+    };
+    getRecord: {
+        parameters: {
+            query: {
+                /** @description The App ID. */
+                app: number | string;
+                /** @description The Record ID. */
+                id: number | string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        record?: {
+                            [key: string]: Record<string, never>;
+                        };
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Record not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Internal server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    updateRecord: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The App ID. */
+                    app?: number | string;
+                    /** @description The Record ID. */
+                    id?: number | string;
+                    /** @description The key to update the record. */
+                    updateKey?: {
+                        field?: string;
+                        value?: string;
+                    };
+                    /** @description The record to update. */
+                    record?: {
+                        [key: string]: {
+                            value?: string;
+                        };
+                    };
+                    /** @description The expected revision number. */
+                    revision?: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description The revision number of the updated record. */
+                        revision?: string;
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Record not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Internal server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    addRecord: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The App ID. */
+                    app?: number;
+                    /** @description The record to add. */
+                    record?: {
+                        [key: string]: {
+                            value?: string;
+                        };
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description The ID of the added record. */
+                        id?: string;
+                        /** @description The revision number of the added record. */
+                        revision?: string;
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description App not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Internal server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    getRecords: {
+        parameters: {
+            query: {
+                /** @description The App ID. */
+                app: number | string;
+                /** @description The query string to filter records. */
+                query?: string;
+                /** @description The fields to retrieve. */
+                fields?: string[];
+                /** @description Whether to include the total count of records. */
+                totalCount?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        records?: {
+                            [key: string]: {
+                                type?: string;
+                                value?: Record<string, never> | string;
+                            };
+                        }[];
+                        /** @description The total count of records. */
+                        totalCount?: string;
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Records not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Internal server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    updateRecords: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The App ID. */
+                    app?: number | string;
+                    /** @description The records to update. */
+                    records?: {
+                        /** @description The Record ID. */
+                        id?: number | string;
+                        /** @description The record to update. */
+                        record?: {
+                            [key: string]: {
+                                value?: string;
+                            };
+                        };
+                        /** @description The expected revision number. */
+                        revision?: string;
+                    }[];
+                };
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        records?: {
+                            /** @description The ID of the updated record. */
+                            id?: number | string;
+                            /** @description The revision number of the updated record. */
+                            revision?: string;
+                        }[];
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Record not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Internal server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    addRecords: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The App ID. */
+                    app?: number | string;
+                    /** @description The records to add. */
+                    records?: {
+                        [key: string]: {
+                            value?: string;
+                        };
+                    }[];
+                };
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description The IDs of the added records. */
+                        ids?: string[];
+                        /** @description The revision numbers of the added records. */
+                        revisions?: string[];
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description App not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Internal server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    deleteRecords: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Request payload for deleting records */
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The ID of the app. */
+                    app: number | string;
+                    /** @description The IDs of the records to delete. */
+                    ids: number[];
+                    /** @description The revision numbers of the records to delete. */
+                    revisions?: number[];
+                };
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description The revision number of the app. */
+                        revision?: string;
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    getRecordsByCursor: {
+        parameters: {
+            query: {
+                /** @description The cursor ID. */
+                id: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        records?: {
+                            [key: string]: unknown;
+                        }[];
+                        /** @description Indicates if there are more records to retrieve. */
+                        next?: boolean;
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    createCursor: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Request payload for creating a cursor */
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The ID of the app. */
+                    app: number;
+                    /** @description The fields to retrieve. */
+                    fields?: string[];
+                    /** @description The query string to filter records. */
+                    query?: string;
+                    /** @description The number of records to retrieve in each batch. */
+                    size?: number;
+                };
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description The ID of the created cursor. */
+                        id?: string;
+                        /** @description The total number of records that match the query. */
+                        totalCount?: number;
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    deleteCursor: {
+        parameters: {
+            query: {
+                /** @description The cursor ID. */
+                id: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No content, cursor deleted successfully */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    getRecordComments: {
+        parameters: {
+            query: {
+                /** @description The ID of the app. */
+                app: number;
+                /** @description The ID of the record. */
+                record: number;
+                /** @description The order in which to retrieve comments. */
+                order?: "asc" | "desc";
+                /** @description The offset for pagination. */
+                offset?: number;
+                /** @description The maximum number of comments to retrieve. */
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        comments?: {
+                            /** @description The ID of the comment. */
+                            id?: number;
+                            /** @description The text of the comment. */
+                            text?: string;
+                            /**
+                             * Format: date-time
+                             * @description The creation time of the comment.
+                             */
+                            createdAt?: string;
+                            creator?: {
+                                /** @description The code of the creator. */
+                                code?: string;
+                                /** @description The name of the creator. */
+                                name?: string;
+                            };
+                        }[];
+                        /** @description Indicates if there are older comments. */
+                        older?: boolean;
+                        /** @description Indicates if there are newer comments. */
+                        newer?: boolean;
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    addRecordComment: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Request payload for adding a comment */
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The ID of the app. */
+                    app: number;
+                    /** @description The ID of the record. */
+                    record: number;
+                    comment: {
+                        /** @description The text of the comment. */
+                        text?: string;
+                        mentions?: {
+                            /** @description The code of the user to mention. */
+                            code?: string;
+                            /** @description The type of the mention (e.g., USER, GROUP, etc.). */
+                            type?: string;
+                        }[];
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description The ID of the added comment. */
+                        id?: number;
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    deleteRecordComment: {
+        parameters: {
+            query: {
+                /** @description The ID of the app. */
+                app: number;
+                /** @description The ID of the record. */
+                record: number;
+                /** @description The ID of the comment. */
+                comment: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No content, comment deleted successfully */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    updateRecordAssignees: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Request payload for updating assignees */
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The ID of the app. */
+                    app: number;
+                    /** @description The ID of the record. */
+                    id: number;
+                    /** @description The list of assignees. */
+                    assignees: string[];
+                };
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description The revision number of the record. */
+                        revision?: string;
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    updateRecordStatus: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Request payload for updating record status */
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The ID of the app. */
+                    app: number;
+                    /** @description The ID of the record. */
+                    id: number;
+                    /** @description The action to perform on the record. */
+                    action: string;
+                    /** @description The assignee of the record. */
+                    assignee?: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description The revision number of the record. */
+                        revision?: string;
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    updateRecordStatuses: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Request payload for updating multiple record statuses */
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The ID of the app. */
+                    app: number;
+                    records: {
+                        /** @description The ID of the record. */
+                        id: number;
+                        /** @description The action to perform on the record. */
+                        action: string;
+                        /** @description The assignee of the record. */
+                        assignee?: string;
+                    }[];
+                };
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        records?: {
+                            /** @description The ID of the record. */
+                            id?: number;
+                            /** @description The revision number of the record. */
+                            revision?: string;
+                        }[];
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    evaluateRecordPermissions: {
+        parameters: {
+            query: {
+                /** @description The ID of the app. */
+                app: number;
+                /** @description The IDs of the records. */
+                ids: number[];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        rights?: {
+                            /** @description レコードID */
+                            id?: string;
+                            record?: {
+                                /** @description レコードの閲覧が可能かどうか true：閲覧できる false：閲覧できない メンテナンスモードの場合は、「false」が設定されます。
+                                 *      */
+                                viewable?: boolean;
+                                /** @description レコードの編集が可能かどうか true：編集できる false：編集できない メンテナンスモードの場合は、「false」が設定されます。
+                                 *      */
+                                editable?: boolean;
+                                /** @description レコードの削除が可能かどうか true：削除できる false：削除できない メンテナンスモードの場合は、「false」が設定されます。
+                                 *      */
+                                deletable?: boolean;
+                            };
+                            fields?: {
+                                [key: string]: {
+                                    /** @description フィールドの閲覧が可能かどうか true：閲覧できる false：閲覧できない メンテナンスモードの場合は、「false」が設定されます。
+                                     *      */
+                                    viewable?: boolean;
+                                    /** @description フィールドの編集が可能かどうか true：編集できる false：編集できない メンテナンスモードの場合は、「false」が設定されます。
+                                     *      */
+                                    editable?: boolean;
+                                };
+                            };
+                        }[];
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+        };
+    };
+    bulkRecordOperations: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Request payload for bulk record operations */
+        requestBody: {
+            content: {
+                "application/json": {
+                    requests: {
+                        /** @description The HTTP method of the API to be executed. */
+                        method: string;
+                        /** @description The URL of the API to be executed. */
+                        api: string;
+                        /** @description The request body to be passed to the API. */
+                        payload: {
+                            [key: string]: unknown;
+                        };
+                    }[];
+                };
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        results?: {
+                            id?: number;
+                            revision?: number;
+                        }[];
+                    };
+                };
+            };
+            /** @description Bad request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestApiError"];
+                };
             };
         };
     };
