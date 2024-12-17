@@ -73,6 +73,79 @@ paths:
             application/json:
               schema: 
                 $ref: '#/components/schemas/KintoneRestApiError'
+  /k/v1/apps.json:
+    get:
+      tags:
+        - App
+      summary: 複数のアプリの情報を取得する。
+      description: 複数のアプリの情報を取得する。
+      operationId: getApps
+      parameters:
+      - name: ids
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        description: アプリID
+      - name: codes
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        description: アプリコード
+      - name: name
+        in: query
+        schema:
+          type: string
+        description: アプリ名
+      - name: spaceIds
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        description: スペースID
+      - name: offset
+        in: query
+        schema:
+          type: number
+          default: 0
+      - name: limit
+        in: query
+        schema:
+          type: number
+          default: 100
+      - name: X-HTTP-Method-Override
+        in: header
+        nullable: true
+        description: メソッドをGETにする
+        schema:
+          type: string
+          enum: [GET]
+          default: GET
+        example:
+          X-HTTP-Method-Override: GET
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAppsRespons'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/KintoneRestApiError'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/KintoneRestApiError'
   /k/v1/preview/app.json:
     post:
       tags:
@@ -579,6 +652,14 @@ components:
               type: string
             name:
               type: string
+    GetAppsRespons:
+      title: Get Apps response
+      type: object
+      properties:
+        apps:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetAppResponss'
     AdminNotes:
       title: App Admin Notes
       description: App Admin Notes
