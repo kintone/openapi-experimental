@@ -572,6 +572,53 @@ paths:
           description: Not found
         '500':
           description: Internal server error
+  /k/v1/record.json:
+    get:
+      $ref: './openapi/paths/record/record.yaml'
+    post:
+      $ref: './openapi/paths/record/record_post.yaml'
+    put:
+      $ref: './openapi/paths/record/record_put.yaml'
+  /k/v1/records.json:
+    get:
+      $ref: './openapi/paths/record/records.yaml'
+    post:
+      $ref: './openapi/paths/record/records_post.yaml'
+    put:
+      $ref: './openapi/paths/record/records_put.yaml'
+    delete:
+      $ref: './openapi/paths/record/records_delete.yaml'
+  /k/v1/records/cursor.json:
+    get:
+      $ref: './openapi/paths/record/cursor_get.yaml'
+    post:
+      $ref: './openapi/paths/record/cursor_post.yaml'
+    delete:
+      $ref: './openapi/paths/record/cursor_delete.yaml'
+  /k/v1/record/comments.json:
+    get:
+      $ref: './openapi/paths/record/comments_get.yaml'
+  /k/v1/record/comment.json:
+    post:
+      $ref: './openapi/paths/record/comment_post.yaml'
+    delete:
+      $ref: './openapi/paths/record/comment_delete.yaml'
+  /k/v1/record/assignees.json:
+    put:
+      $ref: './openapi/paths/record/assignees_put.yaml'
+  /k/v1/record/status.json:
+    put:
+      $ref: './openapi/paths/record/record_status_put.yaml'
+  /k/v1/records/status.json:
+    put:
+      $ref: './openapi/paths/record/records_status_put.yaml'
+  /k/v1/records/acl/evaluate.json:
+    get:
+      $ref: './openapi/paths/record/records_acl_evaluate.yaml'
+  /k/v1/bulkRequest.json:
+    post:
+      $ref: './openapi/paths/record/bulk_request_post.yaml'
+
 components:
   securitySchemes:
     PasswordAuth:
