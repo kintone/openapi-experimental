@@ -24,6 +24,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/k/v1/apps.json": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 複数のアプリの情報を取得する。
+         * @description 複数のアプリの情報を取得する。
+         */
+        get: operations["getApps"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/k/v1/preview/app.json": {
         parameters: {
             query?: never;
@@ -546,6 +566,10 @@ export interface components {
                 name?: string;
             };
         };
+        /** Get Apps response */
+        GetAppsRespons: {
+            apps?: components["schemas"]["GetAppResponss"][];
+        };
         /**
          * App Admin Notes
          * @description App Admin Notes
@@ -553,6 +577,11 @@ export interface components {
         AdminNotes: {
             content?: string;
             includeInTemplateAndDuplicates?: boolean;
+        };
+        /** @description Get App Admin Notes Request */
+        GetAppAdminNotesRequest: {
+            /** @description The App ID. */
+            app?: string;
         };
         /** @description Get App Admin Notes Response */
         GetAppAdminNotesResponse: components["schemas"]["AdminNotes"] & {
@@ -828,6 +857,63 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["GetAppResponss"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KintoneRestApiError"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KintoneRestApiError"];
+                };
+            };
+        };
+    };
+    getApps: {
+        parameters: {
+            query?: {
+                /** @description アプリID */
+                ids?: string[];
+                /** @description アプリコード */
+                codes?: string[];
+                /** @description アプリ名 */
+                name?: string;
+                /** @description スペースID */
+                spaceIds?: string[];
+                offset?: number;
+                limit?: number;
+            };
+            header?: {
+                /**
+                 * @description メソッドをGETにする
+                 * @example {
+                 *       "X-HTTP-Method-Override": "GET"
+                 *     }
+                 */
+                "X-HTTP-Method-Override"?: "GET";
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetAppsRespons"];
                 };
             };
             /** @description Bad Request */
